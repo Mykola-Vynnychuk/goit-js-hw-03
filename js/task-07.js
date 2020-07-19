@@ -17,9 +17,11 @@ const account = {
 
   createTransaction(amount, type) {  // Приймає суму і тип транзакції.
     // Метод створює і повертає об'єкт транзакції.
-    id = this.transactions.length;
-    type = type;
-    amount = amount;
+    let transaction = {};
+    transaction.id = 5;
+    transaction.type = type;
+    transaction.amount = amount;
+    return transaction;
   },
 
   /*
@@ -30,7 +32,7 @@ const account = {
    */
   deposit(amount) {
     this.balance += amount;
-    account.transactions.push(createTransaction(amount, 'deposit'));
+    account.transactions.push(createTransaction(amount, Transaction.DEPOSIT));
   },
 
   /*
@@ -46,8 +48,8 @@ const account = {
     if (amount > this.balance) {
       return alert(`Операція неможлива!
       Недостатньо коштів на балансі`);
-    } 
-    account.transactions.push(createTransaction(amount, 'withdraw'));
+    }
+    account.transactions.push(createTransaction(amount, Transaction.WITHDRAW));
     this.balance -= amount;
   },
   getBalance() {  // Метод повертає поточний баланс

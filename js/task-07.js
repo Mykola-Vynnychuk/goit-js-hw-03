@@ -43,7 +43,7 @@ const account = {
    * про те, що зняття такої суми не можливо, недостатньо коштів.
    */
   withdraw(amount) {
-    if (amount > getBalance()) {
+    if (amount > this.balance) {
       return alert(`Операція неможлива!
       Недостатньо коштів на балансі`);
     } 

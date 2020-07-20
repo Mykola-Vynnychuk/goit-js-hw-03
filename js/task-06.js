@@ -13,7 +13,7 @@ const calculateTotalPrice = function (allProdcuts, productName) {
     if (product.name === productName) {
       return product.price * product.quantity;
     };
-      }
+  }
 };
 
 console.log(calculateTotalPrice(products, 'Радар')); // 5200

@@ -1,10 +1,9 @@
 const buttonTaskTree = document.getElementById('task-tree');
 buttonTaskTree.addEventListener('click', () => {
   const findBestEmployee = function (employees) {
-    const arrayKeysEmployees = Object.entries(employees);
     let bestValue = 0;
     let bestKey;
-    for (let key of arrayKeysEmployees) {
+    for (let key of Object.entries(employees)) {
       if (key[1] > bestValue) {
         bestValue = key[1];
         bestKey = key[0];

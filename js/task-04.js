@@ -1,9 +1,8 @@
 const buttonTaskFour = document.getElementById('task-four');
 buttonTaskFour.addEventListener('click', () => {
   const countTotalSalary = function(employees) {
-    const salary = Object.values(employees);
     let totalSalary = 0;
-    for (let value of salary) {
+    for (let value of Object.values(employees)) {
       totalSalary += value;
     }
     return totalSalary;

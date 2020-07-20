@@ -10,8 +10,7 @@ buttonTaskOne.addEventListener('click', () => {
   user.mod = 'heppy';
   user.hobby = 'skydiving';
   user.premium = false;
-  const arrayUser = Object.keys(user);
-  for (let key of arrayUser) {
+  for (let key of Object.keys(user)) {
     console.log(`${key}: ${user[key]}`);
   }
 });

@@ -1,3 +1,6 @@
+const buttonTaskSix = document.getElementById('task-six');
+buttonTaskSix.addEventListener('click', () => {
+
 const products = [
   { name: 'Радар', price: 1300, quantity: 4 },
   { name: 'Сканер', price: 2700, quantity: 3 },
@@ -16,3 +19,4 @@ const calculateTotalPrice = function (allProdcuts, productName) {
 console.log(calculateTotalPrice(products, 'Радар')); // 5200
 
 console.log(calculateTotalPrice(products, 'Дроїд')); // 2800
+});

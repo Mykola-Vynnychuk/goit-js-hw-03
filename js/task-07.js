@@ -2,9 +2,10 @@
 //  Є об'єкт account в якому необхідно реалізувати методи для роботи
 //з балансом та історією транзакцій.
 
-const Transaction = { // Типи транзацкій
-  DEPOSIT: 'deposit',  // покласти гроші на рахунок
-  WITHDRAW: 'withdraw',  // зняти гроші з рахунку
+const Transaction = {
+  // Типи транзацкій
+  DEPOSIT: 'deposit', // покласти гроші на рахунок
+  WITHDRAW: 'withdraw', // зняти гроші з рахунку
 };
 
 /*
@@ -12,16 +13,18 @@ const Transaction = { // Типи транзацкій
  */
 
 const account = {
-  balance: 10000,  // Поточний баланс рахунку
-  transactions: [],  // Історія транзакцій
+  balance: 0, // Поточний баланс рахунку
+  transactions: [], // Історія транзакцій
 
-  createTransaction(amount, type) {  // Приймає суму і тип транзакції.
+  createTransaction(amount, type) {
+    // Приймає суму і тип транзакції.
     // Метод створює і повертає об'єкт транзакції.
-    let transaction = {};
-    transaction.id = 5;
-    transaction.type = type;
-    transaction.amount = amount;
-    return transaction;
+    const transactionObject = {
+      id: this.transactions.length + 1,
+      type,
+      amount,
+    };
+    return transactionObject;
   },
 
   /*
@@ -32,7 +35,7 @@ const account = {
    */
   deposit(amount) {
     this.balance += amount;
-    account.transactions.push(createTransaction(amount, Transaction.DEPOSIT));
+    this.transactions.push(this.createTransaction(amount, Transaction.DEPOSIT));
   },
 
   /*
@@ -46,19 +49,26 @@ const account = {
    */
   withdraw(amount) {
     if (amount > this.balance) {
-      return alert(`Операція неможлива!
-      Недостатньо коштів на балансі`);
+      return alert(`
+      Операція неможлива!
+      Недостатньо коштів на балансі.
+      Баланс: ${this.balance}`);
     }
-    account.transactions.push(createTransaction(amount, Transaction.WITHDRAW));
+    this.transactions.push(
+      this.createTransaction(amount, Transaction.WITHDRAW),
+    );
     this.balance -= amount;
   },
-  getBalance() {  // Метод повертає поточний баланс
+  getBalance() {
+    // Метод повертає поточний баланс
     return this.balance;
   },
-  getTransactionDetails(id) {  // Метод шукає і повертає об'єкт транзакції по id
-    for(const transaction of this.transactions)
-    if (transaction.id === id) {
-      return this.transactions.transaction;
+  getTransactionDetails(id) {
+    // Метод шукає і повертає об'єкт транзакції по id
+    for (const transaction of this.transactions) {
+      if (transaction.id === +id) {
+        return transaction;
+      }
     }
   },
   /*
@@ -69,12 +79,52 @@ const account = {
     let transactionTotal = 0;
     for (const transaction of this.transactions) {
       if (transaction.type === type) {
-        transactionTotal += this.transactions.amount;
+        transactionTotal += transaction.amount;
       }
     }
     return transactionTotal;
   },
 };
 
-account.withdraw(100);
-console.table(account.transactions);
+const buttonTaskSevenBalance = document.getElementById('task-seven-balance');
+buttonTaskSevenBalance.addEventListener('click', () => {
+  alert(account.getBalance());
+});
+
+const buttonTaskSevenDeposit = document.getElementById('task-seven-deposit');
+buttonTaskSevenDeposit.addEventListener('click', () => {
+  account.deposit(+prompt('Введіть суму:'));
+});
+
+const buttonTaskSevenWithdraw = document.getElementById('task-seven-withdraw');
+buttonTaskSevenWithdraw.addEventListener('click', () => {
+  account.withdraw(+prompt('Введіть суму:'));
+});
+
+const buttonTaskSevenId = document.getElementById('task-seven-id');
+buttonTaskSevenId.addEventListener('click', () => {
+  const transaction = account.getTransactionDetails(
+    +prompt('Введіть номер транзакції:'),
+  );
+  alert(
+    `ID: ${transaction.id}, тип транзакції: ${transaction.type}, сума: ${transaction.amount}`,
+  );
+});
+
+const buttonTaskSevenDepositSum = document.getElementById(
+  'task-seven-deposit-sum',
+);
+buttonTaskSevenDepositSum.addEventListener('click', () => {
+  alert(
+    `В загальному покладено на рахунок: ${account.getTransactionTotal(
+      'deposit',
+    )}`,
+  );
+});
+
+const buttonTaskSevenWithdrawSum = document.getElementById(
+  'task-seven-withdraw-sum',
+);
+buttonTaskSevenWithdrawSum.addEventListener('click', () => {
+  alert(`Усього знято з рахунку: ${account.getTransactionTotal('withdraw')}`);
+});

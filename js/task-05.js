@@ -1,5 +1,5 @@
-//Напиши функцію getAllPropValues(arr, prop), яка отримує масив об'єктів і ім'я властивості.
-//Повертає масив значень певної властивості prop з кожного об'єкта в масиві.
+const buttonTaskFive = document.getElementById('task-five');
+buttonTaskFive.addEventListener('click', () => {
 
 const products = [
   { name: 'Радар', price: 1300, quantity: 4 },
@@ -11,7 +11,7 @@ const products = [
 const getAllPropValues = function (arr, prop) {
   const allPropValues = [];
   for (const obj of arr) {
-    if (obj[prop] !== undefined) {
+    if (obj[prop]) {
       allPropValues.push(obj[prop]);
     }
   }
@@ -26,3 +26,4 @@ console.log(getAllPropValues(products, 'name')); // ['Радар', 'Сканер
 console.log(getAllPropValues(products, 'quantity')); // [4, 3, 7, 2]
 
 console.log(getAllPropValues(products, 'category')); // []
+});
